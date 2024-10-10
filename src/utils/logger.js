@@ -17,13 +17,6 @@ const myFormat = winston.format.combine(
     JSON.stringify(object)
   }),
   winston.format.errors({ stack: true }),
-  winston.format.printf(
-    info =>
-      `[[${info.timestamp}] [${info.level
-        // eslint-disable-next-line no-control-regex
-        .replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g, '')
-        .toUpperCase()}]: [${info.message}]]`
-  )
 )
 
 let loggerData = winston.createLogger({})
