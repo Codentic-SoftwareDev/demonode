@@ -1,0 +1,30 @@
+<!-- jQuery  -->
+<script src="public/js/jquery.min.js"></script>
+<script src="public/js/bootstrap.bundle.min.js"></script>
+<script src="public/js/modernizr.min.js"></script>
+<script src="public/js/jquery.slimscroll.js"></script>
+<script src="public/js/waves.js"></script>
+<script src="public/js/jquery.nicescroll.js"></script>
+<script src="public/js/jquery.scrollTo.min.js"></script>
+<script src="/js/jquery-validation.js"></script>
+<script src="/js/custom.validations.js"></script>
+<!-- App js -->
+<script src="public/js/app.js"></script>
+
+</body>
+<html>
+<script>
+    $('#custom-error-msg').hide()
+    $("#error-msg").delay(2000).slideUp();
+    $("#success-msg").delay(2000).slideUp();
+    setTimeout(function () {
+        $.ajax({
+            type: 'GET',
+            url: '/clear-session',
+            dataType: 'json',
+            success: function (result) { }
+        });
+    }, 2000);
+</script>
+
+</html>

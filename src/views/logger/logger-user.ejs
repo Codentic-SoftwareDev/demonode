@@ -1,0 +1,79 @@
+<%- contentFor('HeaderCss') %>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="public/css/custom.css" rel="stylesheet" />
+    <%- contentFor('breadcrumb') %>
+
+        <%- contentFor('body') %>
+
+            <div class="page-content-wrapper">
+                <div class="row">
+                    <div class="container-fluid">
+                        <form class="add-cause-form addfloorForm" id="display_Logger" action="/get-logger-list"
+                            method="post" enctype="multipart/form-data">
+                            <div class="col-md-12">
+                                <div class="card m-b-30 cause-main">
+                                    <div class="card-body">
+                                        <div id="issues">
+                                            <div class="row">
+                                                <%- include ('../partials/message') %>
+                                                    <div class="col-md-12 add-cause-form-col1">
+                                                        <div class="row">
+                                                            <!--  TYPE -->
+                                                            <div class="col-4">
+                                                                <label>Type</label>
+                                                                <select class="form-control js-example-basic-single"
+                                                                    id="id_type" name="id_type">
+                                                                    <option selected disabled>
+                                                                        --Select Type--
+                                                                    </option>
+
+                                                                    <option value="admin-api">
+                                                                        Admin Log
+                                                                    </option>
+                                                                    <option value="front-end-api" id="api">
+                                                                        Front End Log
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+                                                            <!-- Date -->
+                                                            <div class="col-4">
+                                                                <span id="dates">
+                                                                    <label for="Date" id="dates">Date</label><br>
+                                                                    <input type="date" class="form-control" id="date"
+                                                                        name="date" min="2022-06-01">
+                                                                </span>
+                                                            </div>
+                                                            <div class="col-4" id="button_logger">
+                                                                <button type="button" id="btn_log" name="btn_log"
+                                                                    class="btn  m-b-15 ml-2 btn-danger ">
+                                                                    Clear Current Log
+                                                                </button>
+                                                            </div>
+                                                            <!-- Display Log -->
+                                                            <div class="col-12">
+                                                                <label id="display_label">Display Log</label>
+                                                                <div>
+                                                                    <textarea class="form-control" rows="20"
+                                                                        id="displayLog" name="displayLog"
+                                                                        value="<%= logData %>"></textarea>
+                                                                    <label for="log" id="log" class="demo">
+                                                                        No Log Found!
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <%- contentFor('FooterJs') %>
+                <script src="public/js//jquery.validate.min.js" type="text/javascript"></script>
+
+                <%- contentFor('BottomJs') %>
+
+                    <script src="/public/js/custom/logger-master.js" type="text/javascript"></script>
+                    <!-- <script src="public/plugins/sweetalert/sweetalert2.all.min.js" type="text/javascript"></script> -->

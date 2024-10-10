@@ -1,0 +1,40 @@
+<html>
+<footer class="footer">
+        © <%= new Date().getFullYear() - 1; %> - <%= new Date().getFullYear(); %> Taktikal Digital Marketing services
+                        <span class="text-muted d-none d-sm-inline-block float-right">Developed by <a
+                                        href="https://www.codenticsoftware.com/">Codentic Software</a></i></span>
+
+
+</footer>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</main>
+
+<style>
+        #modal-error {
+                color: red;
+        }
+
+        .close-message {
+                border: none;
+                background: none;
+                color: white;
+        }
+
+</style>
+
+</body>
+<script>
+        $('#custom-error-msg').hide()
+        $("#error-msg").delay(2000).slideUp();
+        $("#success-msg").delay(2000).slideUp();
+        setTimeout(function () {
+                $.ajax({
+                        type: 'GET',
+                        url: '/clear-session',
+                        dataType: 'json',
+                        success: function (result) { }
+                });
+        }, 2000);
+</script>
+
+</html>

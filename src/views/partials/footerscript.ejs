@@ -1,0 +1,126 @@
+<script src="public/js/jquery.min.js"></script>
+<script src="public/js/bootstrap.bundle.min.js"></script>
+<script src="public/js/modernizr.min.js"></script>
+<script src="public/js/jquery.slimscroll.js"></script>
+<script src="public/js/waves.js"></script>
+<script src="public/js/jquery.nicescroll.js"></script>
+<script src="public/js/jquery.scrollTo.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.29.2/sweetalert2.all.js"></script>
+<script src="/public/JSON/code.json"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+<script src="public/js/custom.validations.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+
+<script>
+    function deleteFunc(ele, dataURL) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085D6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.value) {
+                let id = $(ele).closest('table').attr('id');
+                let closest = $(ele).closest('tr');
+                $.ajax({
+                    method: "GET",
+                    url: dataURL,
+                    success: function (data) {
+                        if (data.status == true) {
+                            let table = $('#' + id).DataTable();
+                            table.row(closest).remove().draw()
+                            Swal.fire(
+                                'Deleted!',
+                                'Your file has been deleted.',
+                                'success'
+                            )
+                        } else {
+
+                            if (data.message) {
+                                Swal.fire(
+                                    "Not Deleted",
+                                    data.message,
+                                    'error'
+                                )
+                            } else {
+                                Swal.fire(
+                                    'Oops...',
+                                    'Something went wrong!',
+                                    'error'
+                                )
+                            }
+                        }
+                    }
+                })
+            }
+        })
+    }
+
+    function statusFunc(ele, dataURL, btn = 0) {
+        $('#cover-spin').show();
+        let timerInterval
+        let statusFail = false
+        let message
+        Swal.fire({
+            title: 'Updating Status',
+            html: 'I will close in <strong></strong> seconds.',
+            timer: 1000,
+            onBeforeOpen: () => {
+                $.ajax({
+                    method: "GET",
+                    url: dataURL + ele.value,
+                    success: function (data) {
+                        $('#cover-spin').hide();
+                        if (data.status) {
+                            ele.value = ele.value == "true" ? "false" : "true";
+                            if (btn) {
+                                $(ele).attr("disabled", true);
+                            }
+                        } else {
+                            if (data.value == "true") {
+                                statusFail = true
+                                message = data.message
+                            }
+                        }
+                    }
+                })
+                Swal.showLoading()
+                timerInterval = setInterval(() => {
+                    Swal.getContent().querySelector('strong')
+                        .textContent = Swal.getTimerLeft()
+                }, 100)
+            },
+            onClose: () => {
+                clearInterval(timerInterval)
+                if (statusFail) {
+                    ele.checked = "true"
+                    Swal.fire(
+                        'Declined!',
+                        message,
+                        "error"
+                    )
+                }
+            }
+        }).then((result) => {
+            if (result.dismiss === Swal.DismissReason.timer) { }
+        })
+    }
+
+
+    $(document).ready(function ($) {
+        let url = window.location.href;
+        let activePage = url;
+        $('.admin-sidebar a').each(function () {
+            let linkPage = this.href;
+
+            if (activePage == linkPage) {
+                $(this).closest("li").addClass("active");
+            }
+        });
+    });
+</script>

@@ -1,0 +1,40 @@
+<div class="topbar">
+    <nav class="navbar-custom">
+        <div class="logo-img" style="display:flex ;align-items:center">
+            <img src="/public/images/1.png" width="50px" height="40px" />
+            <li class="hide-phone list-inline-item app-search">
+                <h3 class="page-title">Logger Details</h3>
+            </li>
+            <div style="margin-left: auto;">
+                <button href="/logout" class="btn" style="background: orangered; border: none;"><a href="/logout"
+                        style="color: white;">Logout</a></button>
+            </div>
+
+        </div>
+
+        <!-- Search input -->
+
+
+        <ul class="list-inline float-right mb-0">
+            <!-- User-->
+            <li class="list-inline-item dropdown notification-list">
+                <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#"
+                    role="button" aria-haspopup="false" aria-expanded="false">
+                    <!-- <img src="public/images/users/logo.jpg" alt="user" class="rounded-circle"> -->
+                </a>
+                <!-- <div class="dropdown-menu dropdown-menu-right profile-dropdown "> -->
+                <!-- <a class="dropdown-item" href="#"><i class="dripicons-user text-muted"></i> Profile</a> -->
+
+                <!-- <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/logout"><i class="dripicons-exit text-muted"></i> Logout</a>
+                </div> -->
+            </li>
+        </ul>
+
+        <!-- Page title -->
+        <%- breadcrumb %>
+
+            <!-- <div class="clearfix"></div> -->
+    </nav>
+
+</div>
