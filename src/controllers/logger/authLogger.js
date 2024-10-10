@@ -27,7 +27,7 @@ const loggerUser = async function (req, res, next) {
         message: message.invalidCredentials
       })
     } else {
-      session = req.session
+      let session = req.session
       session.currentUser = loginData.id
       res.redirect('/get-logger-list')
     }
