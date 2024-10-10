@@ -14,29 +14,10 @@ const login = function (req, res, next) {
 
 // Login
 const loggerUser = async function (req, res, next) {
-  const userName = req.body.userName
-
-  const loginData = await loggerLogin.findOne({ user_name: userName })
-
-  if (loginData) {
-    const password = bcrypt.compareSync(req.body.password, loginData.password)
-    if (!password) {
-      return res.render(view.loginView, {
-        session: req.session,
-        status: false,
-        message: message.invalidCredentials
-      })
-    } else {
-      let session = req.session
-      session.currentUser = loginData.id
-      res.redirect('/get-logger-list')
-    }
-  } else {
-    res.render(view.loginView, {
-      session: req.session,
-      status: false,
-      message: message.invalidCredentials
-    })
+  return res.render(view.loginView, {
+    session: req.session,
+    status: false,
+    message: message.invalidCredentials
   }
 }
 
